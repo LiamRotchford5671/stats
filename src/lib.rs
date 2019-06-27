@@ -64,8 +64,14 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// of an empty list is undefined.
 ///
 /// # Examples:
-/// /// ``` /// # use stats::*; /// assert_eq!(None, median(&[])); /// ``` /// ``` /// # use stats::*;
-/// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
+/// 
+/// ``` 
+/// # use stats::*; 
+/// assert_eq!(None, median(&[])); 
+/// ``` 
+/// ``` 
+/// # use stats::*;
+/// assert_eq!(Some(0.25), median(&[0.0, 0.5, -1.0, 1.0]));
 /// ```
 pub fn median(nums: &[f64]) -> Option<f64> {
     // Make a sorted copy of the input floats.
@@ -73,7 +79,28 @@ pub fn median(nums: &[f64]) -> Option<f64> {
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    unimplemented!()
+    let mut length = nums.len();
+    let mut index = length;
+
+    if length != 0 {
+        if index %2 != 0 {                //odd length
+            index = (index -1) / 2;       //determine median index
+            length = 1;                   
+        
+        } else {                          //even length
+            index = index / 2;
+            length = 2;
+        }
+    }
+    //println!("LENGTH: {}", length);
+
+    match length {
+        0 => None,                   //return None for empty array
+        1 => Some(nums[length]),     //return median
+        2 => Some( (nums[index] + nums[index-1]) / 2.0 ),
+        _ => None,
+    }
+
 }
 
 /// L2 norm (Euclidean norm) of input values. The L2
