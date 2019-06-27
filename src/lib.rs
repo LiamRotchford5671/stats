@@ -24,22 +24,22 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
 pub fn mean(nums: &[f64]) -> Option<f64> {
-	
-	let mut sum :f64 = nums.iter().sum();
-	// array iter() trait method sum:  https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count
+    let sum: f64 = nums.iter().sum();
+    // array iter() trait method sum:  https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count
 
-	let mut counter = 0.0;
-	for i in nums {
-		counter += 1.0;
-	}
-	
-	println!("SUM: {}\tCOUNT: {}", sum, counter);
-	
-	match sum {
-		0.0 => Some(0.0),
+    let mut counter = 0.0;
+    for i in nums {
+        counter += 1.0;
+    }
 
-		_ => Some(sum / counter),
-	}
+    //println!("SUM: {}\tCOUNT: {}", sum, counter);
+    let result = if sum == 0.0 {0i64} else {1i64};      //conditional assignment for match since it cant match on floats
+
+    match result {
+        0 => Some(0.0),
+
+        _ => Some(sum / counter),
+    }
 }
 
 /// Population standard deviation of input values. The
@@ -56,8 +56,7 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-
-	unimplemented!()
+    unimplemented!()
 }
 
 /// Median value of input values, taking the value closer
@@ -74,10 +73,7 @@ pub fn median(nums: &[f64]) -> Option<f64> {
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-
     unimplemented!()
-
-
 }
 
 /// L2 norm (Euclidean norm) of input values. The L2
@@ -94,8 +90,5 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
 pub fn l2(nums: &[f64]) -> Option<f64> {
-
-
     unimplemented!()
-
 }
