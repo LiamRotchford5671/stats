@@ -1,4 +1,4 @@
-// Copyright © 2019 Bart Massey
+// Copyright © 2019 Liam Rotchford
 // [This program is licensed under the "MIT License"]
 // Please see the file LICENSE in the source
 // distribution of this software for license terms.
@@ -24,7 +24,22 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
 pub fn mean(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no mean yet")
+	
+	let mut sum :f64 = nums.iter().sum();
+	// array iter() trait method sum:  https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count
+
+	let mut counter = 0.0;
+	for i in nums {
+		counter += 1.0;
+	}
+	
+	println!("SUM: {}\tCOUNT: {}", sum, counter);
+	
+	match sum {
+		0.0 => Some(0.0),
+
+		_ => Some(sum / counter),
+	}
 }
 
 /// Population standard deviation of input values. The
@@ -41,7 +56,8 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no stddev yet")
+
+	unimplemented!()
 }
 
 /// Median value of input values, taking the value closer
@@ -49,13 +65,7 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// of an empty list is undefined.
 ///
 /// # Examples:
-///
-/// ```
-/// # use stats::*;
-/// assert_eq!(None, median(&[]));
-/// ```
-/// ```
-/// # use stats::*;
+/// /// ``` /// # use stats::*; /// assert_eq!(None, median(&[])); /// ``` /// ``` /// # use stats::*;
 /// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
 /// ```
 pub fn median(nums: &[f64]) -> Option<f64> {
@@ -64,7 +74,10 @@ pub fn median(nums: &[f64]) -> Option<f64> {
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    unimplemented!("no median yet")
+
+    unimplemented!()
+
+
 }
 
 /// L2 norm (Euclidean norm) of input values. The L2
@@ -81,5 +94,8 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
 pub fn l2(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no l2 yet")
+
+
+    unimplemented!()
+
 }
