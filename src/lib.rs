@@ -56,7 +56,27 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    unimplemented!()
+    //algorithm found here: https://www.mathsisfun.com/data/standard-deviation-formulas.html
+
+    let meanvalue = mean(nums);             //determine mean
+    let mut count = 0.0;                    //determine count value with for loop so its in f64
+    for i in nums {
+        count += 1.0;
+    }
+
+    let mut sum = 0.0;
+    for j in nums {                         //Subtract the mean from each value and square result
+        sum += (j - meanvalue.unwrap()).powf(2.0);   //sum all of those values together, 
+    }
+
+    sum = (sum / count).sqrt();             //calc Variance and then square it for stand. dev.
+    
+    let result = if count == 0.0 { 0 } else { 1 };
+    match result {
+        0 => None,
+        1 => Some(sum),
+        _ => None,
+    } 
 }
 
 /// Median value of input values, taking the value closer
