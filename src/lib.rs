@@ -24,10 +24,11 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
 pub fn mean(nums: &[f64]) -> Option<f64> {
-    let sum = nums.iter().sum();
+    let sum :f64 = nums.iter().sum();
     // array iter() trait method sum:  https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.count
 
     let counter = nums.len() as f64;
+     //saw "as" keyword under "hints" section on hw1 page
 
     let result = if sum == 0.0 { 0 } else { 1 }; //conditional assignment for match since it cant match on floats
 
@@ -54,7 +55,8 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
     //algorithm found here: https://www.mathsisfun.com/data/standard-deviation-formulas.html
 
     let meanvalue = mean(nums); //determine mean
-    let count = nums.len() as f64; //determine array lenght
+    let count = nums.len() as f64; //determine array length
+    //saw "as" keyword under "hints" section on hw1 page
 
     let mut sum = 0.0;
     for j in nums {
@@ -124,5 +126,19 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
 pub fn l2(nums: &[f64]) -> Option<f64> {
-    unimplemented!()
+    //L2 norm referenced on: http://mathworld.wolfram.com/L2-Norm.html
+
+    let mut norm = 0.0;       
+    for i in nums {
+        norm += i.powf(2.0);      //square each value in array and sum all squared values
+    }
+
+    norm = norm.sqrt();             //square root the sum
+
+    let result = nums.len() as i64;     //determine length of array to see if its empty or not
+    match result {
+        0 => Some(0.0),         
+        _ => Some(norm),
+    }
+
 }
